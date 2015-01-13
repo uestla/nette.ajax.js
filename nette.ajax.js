@@ -155,7 +155,7 @@ var nette = function () {
 	 */
 	this.ajax = function (settings, ui, e) {
 		if (!settings.nette && ui && e) {
-			var $el = $(ui), xhr, originalBeforeSend;
+			var $el = $(ui), originalBeforeSend;
 			var analyze = settings.nette = {
 				e: e,
 				ui: ui,
