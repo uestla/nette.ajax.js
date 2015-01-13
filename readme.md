@@ -12,10 +12,9 @@ jQuery 1.7
 
 ## Installation
 
-1. Get the source code from Github.
-2. Copy `nette.ajax.js` to your directory with Javascript files.
-3. Link the file in your templates (usually in `app/@layout.latte`, after jQuery!).
-4. Put somewhere the initialization routine:
+1. Copy `nette.ajax.js` to your directory with Javascript files (you can use [Bower](http://bower.io/) for this).
+2. Link the file in your templates (usually in `app/@layout.latte`, after jQuery!).
+3. Put somewhere the initialization routine:
 
 ```js
 $(function () {
@@ -56,12 +55,10 @@ Ajaxification is bound to `click` (`submit`) event in `nette` namespace. Ajaxifi
 $('a.no-ajax').off('click.nette');
 ```
 
-If this implementation doesn't suffice you, it can be overriden with custom solution, e.g.:
+Or even simpler:
 
 ```js
-$.nette.init(function (ajaxHandler) {
-	$('a.ajax:not(.no-ajax)').live('click', ajaxHandler);
-});
+$('a.no-ajax').netteAjaxOff();
 ```
 
 ## Extensions
@@ -110,17 +107,17 @@ Second argument should be hash of callbacks with keys corresponding to names of 
 	</tr>
 	<tr>
 		<td><code>success</code></td>
-		<td><code>payload</code></td>
+		<td><code>payload</code>, <code>status</code>, <code>jqXHR</code>, <code>settings</code></td>
 		<td>Called after successful completion of AJAX request. Equivalent to <code>$.ajax( ... ).done( ...</code>.</td>
 	</tr>
 	<tr>
 		<td><code>complete</code></td>
-		<td></td>
+		<td><code>jqXHR</code>, <code>status</code>, <code>settings</code></td>
 		<td>Called after every AJAX request completion. Equivalent to <code>$.ajax( ... ).always( ...</code>.</td>
 	</tr>
 	<tr>
 		<td><code>error</code></td>
-		<td><code>jqXHR</code>, <code>status</code>, <code>error</code></td>
+		<td><code>jqXHR</code>, <code>status</code>, <code>error</code>, <code>settings</code></td>
 		<td>Called in case of failure of AJAX request. Equivalent to <code>$.ajax( ... ).fail( ...</code>.</td>
 	</tr>
 </table>
@@ -202,6 +199,10 @@ Ajaxification of element ensures, that `e.preventDefault()` will be called. This
 ### `data-ajax-append` (in `snippets` extension)
 
 New content of snippet with this attribute won't replace the old content, but it will rather be appended to it.
+
+### `data-ajax-prepend` (in `snippets` extension)
+
+New content of snippet with this attribute won't replace the old content, but it will rather be prepended to it.
 
 ### `data-ajax-validate` (in `validation` extension)
 
